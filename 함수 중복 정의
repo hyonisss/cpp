@@ -45,3 +45,38 @@ void swap(int *a, int *b)
 	*a = *b;
 	*b = t;
 }
+
+
+======================================================================================
+#include <stdio.h>
+
+struct stream
+{
+	void printf(int n);
+	void printf(char c);
+	void printf(const char *str);
+	void printf(double d);
+};
+void stream::printf(int n)
+{
+	::printf("%d", n);
+}
+void stream::printf(char c)
+{
+	::printf("%c", c);
+}
+void stream::printf(const char *str) 
+{
+	::printf("%s", str);
+}
+void stream::printf(double d)
+{
+	::printf("lf", d);
+}
+int main(void)
+{
+	stream c;
+	c.printf(5);
+	c.printf("seoul");
+	c.printf(3.14);
+}

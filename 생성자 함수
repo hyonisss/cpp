@@ -30,4 +30,6 @@ int main(void)
 	A aa; // A aa = A();
 	A bb(5); // A bb = A(5);
 	A cc(5, 'A'); // A cc = A(5, 'A');
+	
+	A aa[3] = A{A(), A(5), A(5,'A')};
 }

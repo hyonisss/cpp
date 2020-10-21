@@ -1,0 +1,33 @@
+
+#include <iostream>
+using namespace std;
+
+class A
+{
+	int no;
+	char ch;
+public:
+	A();
+	A(int n);
+	A(int n, char c);
+};
+//생성자 함수 외부에 정의
+A::A() 
+{
+	cout << "def cons..." << endl;
+}
+A::A(int n)
+{
+	cout << "int cons..." << endl;
+}
+A::A(int n, char c)
+{
+	cout << "int char cons..." << endl;
+}
+
+int main(void)
+{
+	A aa; // A aa = A();
+	A bb(5); // A bb = A(5);
+	A cc(5, 'A'); // A cc = A(5, 'A');
+}

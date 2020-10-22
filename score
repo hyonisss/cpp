@@ -1,0 +1,84 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+#define ScoreRng(S) (((S>=0) && (S<=100)) ? (S) : (0))
+struct Score
+{
+private:
+	char * name;
+	int kor, eng, mat;
+	int tot;
+	double ave;
+	void CalcScore(void);
+
+public:
+	void InitScore(void);
+	//void InitScore(const char * irum, int k, int e, int m);
+	void PrintScore(void);
+	void DeleteScore(void);
+};
+void Score::InitScore(void)
+{
+	char temp[20];
+	size_t len;
+	do {
+		cout << "Name : ";
+		cin.clear();
+		cin.ignore(cin.rdbuf()->in_avail());
+		cin.getline(temp, 20);
+	} while (cin.fail());
+	len = ::strlen(temp);
+	name = new char[++len];
+	::strcpy_s(name, len, temp);
+
+	do {
+		cout << "Score : ";
+		cin.clear();
+		cin.ignore(cin.rdbuf()->in_avail());
+		cin >> kor >> eng >> mat;
+	} while (cin.fail() || !ScoreRng(kor) || !ScoreRng(eng) || !ScoreRng(mat));
+
+	CalcScore();
+
+}
+
+void Score::CalcScore(void)
+{
+	tot = kor + eng + mat;
+	ave = (double)tot / 3.0;
+}
+
+void Score::PrintScore(void)
+{
+	char grade[10] = { 'D','D','D','D','D','D','D','C','B','A' };
+	cout << name << '\t' << grade[kor / 10] << '\t' << grade[eng / 10] << '\t' << grade[mat / 10]
+		<< '\t' << tot << '\t' << fixed << setprecision(2) << ave << endl;
+}
+
+void Score::DeleteScore(void)
+{
+	delete[] name;
+}
+
+int main(void)
+{
+	unsigned int cnt, i;
+	Score * pScore;
+	cout << "Count :";
+	cin >> cnt;
+	pScore = new Score[cnt];
+	for (i = 0; i < cnt; i++)
+	{
+		pScore[i].InitScore();
+	}
+	for (i = 0; i < cnt; i++)
+	{
+		pScore[i].PrintScore();
+	}
+	for (i = 0; i < cnt; i++)
+	{
+		pScore[i].DeleteScore();
+	}
+	delete[] pScore;
+}

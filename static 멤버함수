@@ -1,3 +1,5 @@
+- Example 1)
+
 #include <iostream>
 using namespace std;
 
@@ -23,4 +25,48 @@ int main(void)
 	A aa(5), bb(3), cc(5);
 	//cout << A::sum << endl; // sum은 private 권한이 있기 때문에 출력 안됨
 	cout << A::GetSum() << endl; //13	
+}
+
+- Example 2)
+#include <iostream>
+using namespace std;
+
+class CMainFrame
+{
+	CMainFrame(); //생성자를 private에 감춰둠
+public:
+	static CMainFrame * CreateObject(void);
+	~CMainFrame();
+	void ShowWindow(void);
+};
+
+CMainFrame::CMainFrame()
+{
+	cout << "Create Window..." << endl;
+}
+
+CMainFrame::~CMainFrame()
+{
+	cout << "Bye Window..." << endl;
+}
+
+void CMainFrame::ShowWindow(void)
+{
+	cout << "Show Wndow..." << endl;
+}
+
+CMainFrame * CMainFrame::CreateObject(void)
+{
+	return new CMainFrame; //객체생성은 이 함수 안에서만 가능
+	//단점 : aa의 lifetime이 이 함수 안에서만 국한됨
+	//그렇다면 원하는 시점에 사용하고 없애려면? new - delete 활용
+}
+
+int main(void)
+{
+	//CMainFrame aa; // error (private 권한이므로)
+	CMainFrame * p;
+	p = CMainFrame::CreateObject(); // 객체 생성 없이 클래스 진입
+	p->ShowWindow();
+	delete p; // 소멸자 call
 }

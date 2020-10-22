@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+class A
+{
+	int no;
+	static int sum;
+public:
+	A() {}
+	A(int n) : no(n) { A::sum += no; }
+	static int GetSum(void);
+};
+int A::sum = 0;
+
+int A::GetSum(void)
+{
+	return A::sum;
+}
+
+int main(void)
+{
+	cout << A::GetSum() << endl; //0
+	A aa(5), bb(3), cc(5);
+	//cout << A::sum << endl; // sum은 private 권한이 있기 때문에 출력 안됨
+	cout << A::GetSum() << endl; //13	
+}

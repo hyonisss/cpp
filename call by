@@ -2,7 +2,7 @@
 using namespace std;
 
 void subv(int k);
-void subp(int * p);
+void subp(int * p); 
 void subr(int &k);
 
 int main(void)

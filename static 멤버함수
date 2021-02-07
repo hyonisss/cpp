@@ -50,6 +50,7 @@ CMainFrame::~CMainFrame()
 	cout << "Bye Window..." << endl;
 }
 
+
 void CMainFrame::ShowWindow(void)
 {
 	cout << "Show Wndow..." << endl;
